@@ -32,11 +32,7 @@ This project is updated from a previous project called "Reservasi Ruangan Kelas"
 
 ## Visuals
 
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Authors and acknowledgment
-
-Show your appreciation to those who have contributed to the project.
+[Coming soon]
 
 ## License
 
