@@ -46,4 +46,9 @@ interface ReservasiService {
     suspend fun bookRuangan(
         @Body bookRuangan: BookRuangan,
     ): Response<BaseResponse<BookRuangan>>
+
+    @GET("bookruangan/status/{id_mahasiswa}")
+    suspend fun getStatusRuangan(
+        @Path("id_mahasiswa") idMahasiswa: Int,
+    ): Response<BaseResponse<List<BookRuangan>>>
 }

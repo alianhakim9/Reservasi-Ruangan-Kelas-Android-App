@@ -7,4 +7,6 @@ class MahasiswaRepository @Inject constructor(private val api: ReservasiService)
     suspend fun loginMahasiswa(nim: String, password: String) = api.loginMahasiswa(nim, password)
 
     suspend fun getProfile(nim: String) = api.getProfileMahasiswa(nim)
+
+    suspend fun getStatusReservasi(idMahasiswa: Int) = api.getStatusRuangan(idMahasiswa)
 }

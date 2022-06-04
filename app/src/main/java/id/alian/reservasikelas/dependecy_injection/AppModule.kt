@@ -8,6 +8,7 @@ import id.alian.reservasikelas.service.ReservasiService
 import id.alian.reservasikelas.service.repository.DosenRepository
 import id.alian.reservasikelas.service.repository.MahasiswaRepository
 import id.alian.reservasikelas.service.repository.RuanganRepository
+import id.alian.reservasikelas.view.callback.Constants.BASE_URL
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -28,7 +29,7 @@ object AppModule {
             .build()
 
         return Retrofit.Builder()
-            .baseUrl("https://reservasiapi.pagekite.me/api/")
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

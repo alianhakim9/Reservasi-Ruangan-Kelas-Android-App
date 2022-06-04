@@ -51,4 +51,5 @@
     <string name="title_sedang_reservasi">Reservasi ruangan...</string>
     <string name="title_success_reservation">Reservasi berhasil</string>
     <string name="extra_id_dosen">id_dosen</string>
+    <string name="title_kode_matakuliah">Kode Mata Kuliah</string>
 </resources>

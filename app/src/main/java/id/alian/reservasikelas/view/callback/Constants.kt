@@ -1,6 +1,7 @@
 package id.alian.reservasikelas.view.callback
 
 object Constants {
+    const val BASE_URL = "https://edc0-103-147-9-89.ngrok.io/api/"
     const val DATA_EMPTY_MESSAGE = "Harap lengkapi data"
     const val NO_INTERNET_CONNECTION = "Cek koneksi internet"
     const val TAG = "Reservasi App"

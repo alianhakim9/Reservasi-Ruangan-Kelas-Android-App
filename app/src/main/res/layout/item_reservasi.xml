@@ -17,7 +17,7 @@
         android:padding="@dimen/dimen_20dp">
 
         <TextView
-            android:id="@+id/namaRuanganTextView"
+            android:id="@+id/idBookTextView"
             style="@style/TextAppearance.MaterialComponents.Headline6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,12 +26,47 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/statusRuanganTextView"
+            android:id="@+id/kodeRuanganTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/title_status_ruangan"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/namaRuanganTextView" />
+            app:layout_constraintTop_toBottomOf="@id/idBookTextView" />
+
+        <TextView
+            android:id="@+id/kodeMataKuliahTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:text="@string/title_kode_matakuliah"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/kodeRuanganTextView" />
+
+        <TextView
+            android:id="@+id/jamAwalTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_jam_awal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/kodeMataKuliahTextView" />
+
+        <TextView
+            android:id="@+id/nimTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_nim"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/jamAwalTextView" />
+
+        <TextView
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_status_reservasi"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nimTextView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

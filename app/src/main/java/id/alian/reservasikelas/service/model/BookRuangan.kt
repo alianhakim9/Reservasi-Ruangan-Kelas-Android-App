@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class BookRuangan(
     val id: Int? = null,
+    @SerializedName("id_book")
+    val idBook: Int? = null,
     @SerializedName("id_ruangan")
     val idRuangan: Int,
     @SerializedName("id_matakuliah")
@@ -17,4 +19,9 @@ data class BookRuangan(
     val jamAwal: String,
     @SerializedName("jam_akhir")
     val jamAkhir: String,
+    val ruangan: Ruangan? = null,
+    val dosen: Dosen? = null,
+    val mahasiswa: Mahasiswa? = null,
+    @SerializedName("matakuliah")
+    val mataKuliah: MataKuliah? = null,
 )
