@@ -51,4 +51,11 @@ interface ReservasiService {
     suspend fun getStatusRuangan(
         @Path("id_mahasiswa") idMahasiswa: Int,
     ): Response<BaseResponse<List<BookRuangan>>>
+
+    @PUT("mahasiswa/profil/update/{id_mahasiswa}")
+    suspend fun editProfileMhs(
+        @Path("id_mahasiswa") idMahasiswa: Int,
+        @Query("email") email: String,
+        @Query("password") password: String,
+    ): Response<BaseResponse<Mahasiswa>>
 }

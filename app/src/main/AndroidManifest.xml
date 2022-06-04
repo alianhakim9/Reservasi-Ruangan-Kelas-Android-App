@@ -14,6 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ReservasiKelas">
         <activity
+            android:name=".view.ui.mahasiswa.EditProfileMahasiswaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.ui.dosen.EditProfileDosenActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.ui.reservasi.StatusReservasiActivity"
             android:exported="false" />
         <activity

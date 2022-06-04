@@ -11,9 +11,9 @@ import id.alian.reservasikelas.service.model.MataKuliah
 import id.alian.reservasikelas.service.model.Ruangan
 import id.alian.reservasikelas.service.repository.RuanganRepository
 import id.alian.reservasikelas.service.response.BaseResponse
-import id.alian.reservasikelas.view.callback.Constants.DATA_EMPTY_MESSAGE
-import id.alian.reservasikelas.view.callback.Constants.NO_INTERNET_CONNECTION
-import id.alian.reservasikelas.view.callback.Constants.SERVER_ERROR
+import id.alian.reservasikelas.view.callback.Constants.MESSAGE_DATA_EMPTY
+import id.alian.reservasikelas.view.callback.Constants.MESSAGE_NO_INTERNET_CONNECTION
+import id.alian.reservasikelas.view.callback.Constants.MESSAGE_SERVER_ERROR
 import id.alian.reservasikelas.view.callback.Constants.TAG
 import id.alian.reservasikelas.view.callback.Resource
 import id.alian.reservasikelas.view.callback.checkInternetConnection
@@ -57,15 +57,15 @@ class RuanganViewModel @Inject constructor(
                         }
                     } else {
                         Log.i(TAG, "getDataRuangan: ${response.code()}")
-                        _ruangan.value = Resource.Error(SERVER_ERROR)
+                        _ruangan.value = Resource.Error(MESSAGE_SERVER_ERROR)
                     }
                 } catch (e: Exception) {
                     Log.i(TAG, "getDataRuangan: ${e.localizedMessage}")
-                    _ruangan.value = Resource.Error(SERVER_ERROR)
+                    _ruangan.value = Resource.Error(MESSAGE_SERVER_ERROR)
                 }
             }
         } else {
-            _ruangan.value = Resource.Error(NO_INTERNET_CONNECTION)
+            _ruangan.value = Resource.Error(MESSAGE_NO_INTERNET_CONNECTION)
         }
     }
 
@@ -81,7 +81,7 @@ class RuanganViewModel @Inject constructor(
                 }
             }
         } catch (e: Exception) {
-            _mataKuliah.value = Resource.Error(SERVER_ERROR)
+            _mataKuliah.value = Resource.Error(MESSAGE_SERVER_ERROR)
             Log.i(TAG, "getDataMataKuliah: ${e.localizedMessage}")
         }
     }
@@ -98,7 +98,7 @@ class RuanganViewModel @Inject constructor(
                 }
             }
         } catch (e: Exception) {
-            _dosen.value = Resource.Error(SERVER_ERROR)
+            _dosen.value = Resource.Error(MESSAGE_SERVER_ERROR)
             Log.i(TAG, "getDataMataKuliah: ${e.localizedMessage}")
         }
     }
@@ -108,7 +108,7 @@ class RuanganViewModel @Inject constructor(
         if (app.checkInternetConnection()) {
             with(bookRuangan) {
                 if (idDosen == 0 || idMahasiswa == 0 || idMataKuliah == 0 || tanggal.isEmpty() || jamAwal.isEmpty() || jamAkhir.isEmpty()) {
-                    _bookRuangan.value = Resource.Error(DATA_EMPTY_MESSAGE)
+                    _bookRuangan.value = Resource.Error(MESSAGE_DATA_EMPTY)
                 } else {
                     viewModelScope.launch {
                         try {
@@ -119,17 +119,17 @@ class RuanganViewModel @Inject constructor(
                                 }
                             } else {
                                 Log.i(TAG, "bookRuangan: $response")
-                                _bookRuangan.value = Resource.Error(SERVER_ERROR)
+                                _bookRuangan.value = Resource.Error(MESSAGE_SERVER_ERROR)
                             }
                         } catch (e: java.lang.Exception) {
                             Log.i(TAG, "bookRuangan: $e")
-                            _bookRuangan.value = Resource.Error(SERVER_ERROR)
+                            _bookRuangan.value = Resource.Error(MESSAGE_SERVER_ERROR)
                         }
                     }
                 }
             }
         } else {
-            _bookRuangan.value = Resource.Error(NO_INTERNET_CONNECTION)
+            _bookRuangan.value = Resource.Error(MESSAGE_NO_INTERNET_CONNECTION)
         }
     }
 }

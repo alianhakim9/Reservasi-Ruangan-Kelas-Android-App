@@ -70,15 +70,16 @@
         app:layout_constraintTop_toBottomOf="@id/jurusanTextView" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bookRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="@dimen/dimen_20dp"
         android:layout_marginTop="@dimen/dimen_10dp"
         android:layout_marginBottom="@dimen/dimen_10dp"
         app:layout_constraintBottom_toTopOf="@id/btnEditProfile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgProfile" />
+        app:layout_constraintTop_toBottomOf="@id/imgProfile"
+        tools:listitem="@layout/item_reservasi" />
 
     <Button
         android:id="@+id/btnEditProfile"

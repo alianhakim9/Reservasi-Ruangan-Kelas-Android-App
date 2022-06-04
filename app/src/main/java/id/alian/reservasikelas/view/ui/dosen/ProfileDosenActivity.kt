@@ -9,6 +9,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import id.alian.reservasikelas.R
 import id.alian.reservasikelas.databinding.ActivityProfileDosenBinding
 import id.alian.reservasikelas.view.callback.Resource
+import id.alian.reservasikelas.view.callback.openActivity
 import id.alian.reservasikelas.view.callback.shortSnackBar
 import id.alian.reservasikelas.viewmodel.DosenViewModel
 
@@ -27,6 +28,11 @@ class ProfileDosenActivity : AppCompatActivity() {
             toolbar.setNavigationOnClickListener {
                 finish()
             }
+            btnEditProfile.setOnClickListener {
+                openActivity(EditProfileDosenActivity::class.java)
+            }
+
+            toolbar.setNavigationOnClickListener { finish() }
         }
 
         viewModel.getProfile()

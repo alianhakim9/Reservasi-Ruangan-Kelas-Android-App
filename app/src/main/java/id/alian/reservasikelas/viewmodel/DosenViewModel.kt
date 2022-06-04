@@ -38,7 +38,7 @@ class DosenViewModel @Inject constructor(
         _login.value = Resource.Loading()
         if (nidn.isNotEmpty() && password.isNotEmpty()) {
             if (nidn.length < 10) {
-                _login.value = Resource.Error(Constants.NOT_VALID_NIM)
+                _login.value = Resource.Error(Constants.MESSAGE_NOT_VALID_NIM)
             } else {
                 if (app.checkInternetConnection()) {
                     try {
@@ -50,9 +50,9 @@ class DosenViewModel @Inject constructor(
                                 }
                             } else {
                                 if (response.code() == 400) {
-                                    _login.value = Resource.Error(Constants.LOGIN_FAILED_DOSEN)
+                                    _login.value = Resource.Error(Constants.MESSAGE_LOGIN_FAILED_DOSEN)
                                 } else {
-                                    _login.value = Resource.Error(Constants.SERVER_ERROR)
+                                    _login.value = Resource.Error(Constants.MESSAGE_SERVER_ERROR)
                                 }
                             }
                         }
@@ -60,11 +60,11 @@ class DosenViewModel @Inject constructor(
                         Log.i(Constants.TAG, "login: ${e.localizedMessage}")
                     }
                 } else {
-                    _login.value = Resource.Error(Constants.NO_INTERNET_CONNECTION)
+                    _login.value = Resource.Error(Constants.MESSAGE_NO_INTERNET_CONNECTION)
                 }
             }
         } else {
-            _login.value = Resource.Error(Constants.DATA_EMPTY_MESSAGE)
+            _login.value = Resource.Error(Constants.MESSAGE_DATA_EMPTY)
         }
     }
 
@@ -85,8 +85,12 @@ class DosenViewModel @Inject constructor(
                     Log.i(Constants.TAG, "getProfile: ${e.localizedMessage}")
                 }
             } else {
-                _profile.postValue(Resource.Error(Constants.NO_INTERNET_CONNECTION))
+                _profile.postValue(Resource.Error(Constants.MESSAGE_NO_INTERNET_CONNECTION))
             }
         }
+    }
+
+    fun editProfile() {
+
     }
 }

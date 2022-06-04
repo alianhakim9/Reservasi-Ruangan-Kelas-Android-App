@@ -3,17 +3,21 @@ package id.alian.reservasikelas.viewmodel
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import id.alian.reservasikelas.service.model.BookRuangan
 import id.alian.reservasikelas.service.model.Mahasiswa
 import id.alian.reservasikelas.service.repository.MahasiswaRepository
 import id.alian.reservasikelas.service.response.BaseResponse
-import id.alian.reservasikelas.view.callback.Constants.DATA_EMPTY_MESSAGE
-import id.alian.reservasikelas.view.callback.Constants.LOGIN_FAILED_MHS
-import id.alian.reservasikelas.view.callback.Constants.NOT_VALID_NIM
-import id.alian.reservasikelas.view.callback.Constants.NO_INTERNET_CONNECTION
-import id.alian.reservasikelas.view.callback.Constants.SERVER_ERROR
+import id.alian.reservasikelas.view.callback.Constants.MESSAGE_DATA_EMPTY
+import id.alian.reservasikelas.view.callback.Constants.MESSAGE_FAILED
+import id.alian.reservasikelas.view.callback.Constants.MESSAGE_LOGIN_FAILED_MHS
+import id.alian.reservasikelas.view.callback.Constants.MESSAGE_NOT_VALID_NIM
+import id.alian.reservasikelas.view.callback.Constants.MESSAGE_NO_INTERNET_CONNECTION
+import id.alian.reservasikelas.view.callback.Constants.MESSAGE_PASSWORD_NOT_MATCH
+import id.alian.reservasikelas.view.callback.Constants.MESSAGE_SERVER_ERROR
 import id.alian.reservasikelas.view.callback.Constants.TAG
 import id.alian.reservasikelas.view.callback.Resource
 import id.alian.reservasikelas.view.callback.checkInternetConnection
@@ -40,6 +44,11 @@ class MahasiswaViewModel @Inject constructor(
         MutableStateFlow<Resource<BaseResponse<List<BookRuangan>>>>(Resource.Empty())
     val status: StateFlow<Resource<BaseResponse<List<BookRuangan>>>> = _status
 
+    private var _update =
+        MutableStateFlow<Resource<BaseResponse<Mahasiswa>>>(Resource.Empty())
+    val update: StateFlow<Resource<BaseResponse<Mahasiswa>>> = _update
+
+    // shared pref
     val sharedPref = app.getReservasiSharedPref()
     private val nim = sharedPref.getString("nim", null)
     private val idMahasiswa = sharedPref.getInt("id_mahasiswa", 0)
@@ -48,7 +57,7 @@ class MahasiswaViewModel @Inject constructor(
         _login.value = Resource.Loading()
         if (nim.isNotEmpty() && password.isNotEmpty()) {
             if (nim.length < 10) {
-                _login.value = Resource.Error(NOT_VALID_NIM)
+                _login.value = Resource.Error(MESSAGE_NOT_VALID_NIM)
             } else {
                 if (app.checkInternetConnection()) {
                     try {
@@ -60,9 +69,9 @@ class MahasiswaViewModel @Inject constructor(
                                 }
                             } else {
                                 if (response.code() == 400) {
-                                    _login.value = Resource.Error(LOGIN_FAILED_MHS)
+                                    _login.value = Resource.Error(MESSAGE_LOGIN_FAILED_MHS)
                                 } else {
-                                    _login.value = Resource.Error(SERVER_ERROR)
+                                    _login.value = Resource.Error(MESSAGE_SERVER_ERROR)
                                 }
                             }
                         }
@@ -70,11 +79,11 @@ class MahasiswaViewModel @Inject constructor(
                         Log.i(TAG, "login: ${e.localizedMessage}")
                     }
                 } else {
-                    _login.value = Resource.Error(NO_INTERNET_CONNECTION)
+                    _login.value = Resource.Error(MESSAGE_NO_INTERNET_CONNECTION)
                 }
             }
         } else {
-            _login.value = Resource.Error(DATA_EMPTY_MESSAGE)
+            _login.value = Resource.Error(MESSAGE_DATA_EMPTY)
         }
     }
 
@@ -94,9 +103,9 @@ class MahasiswaViewModel @Inject constructor(
                             }
                         } else {
                             if (response.code() == 400) {
-                                _profile.value = Resource.Error(LOGIN_FAILED_MHS)
+                                _profile.value = Resource.Error(MESSAGE_LOGIN_FAILED_MHS)
                             } else {
-                                _profile.value = Resource.Error(SERVER_ERROR)
+                                _profile.value = Resource.Error(MESSAGE_SERVER_ERROR)
                             }
                         }
                     }
@@ -104,7 +113,7 @@ class MahasiswaViewModel @Inject constructor(
                     Log.i(TAG, "getProfile: ${e.localizedMessage}")
                 }
             } else {
-                _profile.value = Resource.Error(NO_INTERNET_CONNECTION)
+                _profile.value = Resource.Error(MESSAGE_NO_INTERNET_CONNECTION)
             }
         }
     }
@@ -121,7 +130,7 @@ class MahasiswaViewModel @Inject constructor(
                                 _status.value = Resource.Success(it)
                             }
                         } else {
-                            _status.value = Resource.Error(SERVER_ERROR)
+                            _status.value = Resource.Error(MESSAGE_SERVER_ERROR)
                         }
                     } catch (e: Exception) {
                         Log.i(TAG, "getStatusReservasi: $e")
@@ -129,7 +138,32 @@ class MahasiswaViewModel @Inject constructor(
                     }
                 }
             } else {
-                _status.value = Resource.Error(NO_INTERNET_CONNECTION)
+                _status.value = Resource.Error(MESSAGE_NO_INTERNET_CONNECTION)
+            }
+        }
+    }
+
+    fun editProfile(email: String, password: String, confirmationPassword: String) {
+        if (email.isNotEmpty() || password.isNotEmpty()) {
+            _update.value = Resource.Loading()
+            if (password == confirmationPassword) {
+                viewModelScope.launch {
+                    try {
+                        val response = repository.editProfile(idMahasiswa, email, password)
+                        if (response.isSuccessful) {
+                            response.body()?.let {
+                                _update.value = Resource.Success(it)
+                            }
+                        } else {
+                            _update.value = Resource.Error(MESSAGE_FAILED)
+                        }
+                    } catch (e: Exception) {
+                        Log.i(TAG, "editProfile: $e")
+                        _update.value = Resource.Error(e.message.toString())
+                    }
+                }
+            } else {
+                _update.value = Resource.Error(MESSAGE_PASSWORD_NOT_MATCH)
             }
         }
     }

@@ -52,4 +52,10 @@
     <string name="title_success_reservation">Reservasi berhasil</string>
     <string name="extra_id_dosen">id_dosen</string>
     <string name="title_kode_matakuliah">Kode Mata Kuliah</string>
+    <string name="title_email">Email</string>
+    <string name="title_new_password">Password baru</string>
+    <string name="title_confirmation_password">Konfirmasi Password</string>
+    <string name="title_simpan">Simpan</string>
+    <string name="title_ubah_password">Ubah password</string>
+    <string name="title_update_success">Berhasil di update</string>
 </resources>
