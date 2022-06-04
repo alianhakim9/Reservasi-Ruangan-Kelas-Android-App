@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="id.alian.reservasikelas">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name="id.alian.ReservasiApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ReservasiKelas">
+        <activity
+            android:name=".view.ui.reservasi.StatusReservasiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.ui.ruangan.DetailRuanganActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.ui.ruangan.ListRuanganActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.ui.dosen.ProfileDosenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.ui.mahasiswa.ProfileMahasiswaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.ui.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.ui.dosen.LoginDosenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.ui.mahasiswa.LoginMahasiswaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.ui.PilihanLoginActivity"
+            android:exported="false"
+            android:noHistory="true" />
+        <activity
+            android:name=".view.ui.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".view.ui.PilihanLoginActivity">
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_pilihan_login"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_25sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnLoginMahasiswa"
+        android:layout_width="@dimen/dimen_200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:text="@string/title_mahasiswa" />
+
+    <Button
+        android:id="@+id/btnLoginDosen"
+        android:layout_width="@dimen/dimen_200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/title_dosen" />
+</LinearLayout>
